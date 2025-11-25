@@ -37,6 +37,14 @@ var currentTopController:UIViewController?
         if(isSDKInitilise){
             if joinZoomSession(jwt: JWTToken, sessionName: sessionName, userName: userName){
                 openVideoCall(shareExtensionBundleId: shareExtensionBundleId);
+                let result = CDVPluginResult.init(status: CDVCommandStatus.error, messageAs:"Zoom Session Started Successfully");
+                result?.setKeepCallbackAs(true);
+                self.commandDelegate.send(result, callbackId: self.fileUploadCallBackId);
+            }
+            else{
+                let result = CDVPluginResult.init(status: CDVCommandStatus.error, messageAs:"Zoom Session Error");
+                result?.setKeepCallbackAs(true);
+                self.commandDelegate.send(result, callbackId: self.fileUploadCallBackId);
             }
         }
     }
