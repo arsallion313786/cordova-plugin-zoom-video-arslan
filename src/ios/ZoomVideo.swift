@@ -156,10 +156,21 @@ var currentTopController:UIViewController?
         switch sdkInitReturnStatus {
         case .Errors_Success:
             print("SDK initialized successfully")
+            let result = CDVPluginResult.init(status: CDVCommandStatus.error, messageAs:"SDK initialized successfully");
+            result?.setKeepCallbackAs(true);
+            self.commandDelegate.send(result, callbackId: self.fileUploadCallBackId);
         default:
             if let error = sdkInitReturnStatus {
                 print("SDK failed to initialize: \(error)")
+                let result = CDVPluginResult.init(status: CDVCommandStatus.error, messageAs:"SDK failed to initialize: \(error)");
+                result?.setKeepCallbackAs(true);
+                self.commandDelegate.send(result, callbackId: self.fileUploadCallBackId);
                 return false
+            }
+            else{
+                let result = CDVPluginResult.init(status: CDVCommandStatus.error, messageAs:"SDK initialized error");
+                result?.setKeepCallbackAs(true);
+                self.commandDelegate.send(result, callbackId: self.fileUploadCallBackId);
             }
         }
         return true
