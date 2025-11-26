@@ -173,6 +173,7 @@
                    <array>
                        <string>audio</string>
                        <string>voip</string>
+                       <string>picture-in-picture</string>
                    </array>
                </config-file>
         
